@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>โครงการอบรมผู้สนใจอิสลาม</title>
+
+    <!-- Tailwind CSS (CDN for simple plug & play on GitHub Pages) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Sarabun -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind Custom Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'islamic-green': '#064e3b',
+                        'islamic-gold': '#fbbf24',
+                        'off-white': '#F9FBFA'
+                    },
+                    fontFamily: {
+                        'sarabun': ['Sarabun', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'float': '0 10px 40px -10px rgba(6, 78, 59, 0.15)',
+                        'float-hover': '0 20px 40px -10px rgba(6, 78, 59, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #F9FBFA;
+            /* Off-white */
+        }
+
+        /* Antigravity floating & hover effects (Translate-Y) */
+        .hover-float {
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .hover-float:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -10px rgba(6, 78, 59, 0.25);
+        }
+
+        /* Responsive Iframe Container for 16:9 Aspect Ratio */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+        }
+
+        /* Slide Container */
+        .slide-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .slide-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+        }
+    </style>
+</head>
+
+<body
+    class="text-gray-800 antialiased min-h-screen flex flex-col items-center selection:bg-islamic-green selection:text-white">
+
+    <!-- Container Wrap (Max 1024px, Center Column) -->
+    <div class="w-full max-w-5xl px-4 py-8 md:py-12 flex-grow flex flex-col">
+
+        <!-- =======================
+             TOP: Header Section 
+        ======================== -->
+
+        <!-- Main Website Title -->
+        <div class="w-full text-center md:text-left mb-8 md:mb-12">
+            <h1 class="text-2xl md:text-4xl font-bold text-gray-800 mb-2">บรรยาย 15 หัวข้อสำหรับผู้สนใจศึกษาอิสลาม</h1>
+            <p class="text-base md:text-lg text-gray-500">โดย โครงการอบรมผู้สนใจอิสลาม มูลนิธิสันติชน</p>
+        </div>
+
+        <header class="mb-10 w-full">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <!-- Title & Category -->
+                <div>
+                    <div class="inline-flex items-center gap-2 bg-islamic-gold/10 px-3 py-1 rounded-full mb-3">
+                        <i class="fas fa-bookmark text-islamic-gold text-xs"></i>
+                        <h2 class="text-islamic-gold font-semibold text-sm tracking-wider uppercase" id="categoryLabel">
+                            บทนำอิสลาม
+                        </h2>
+                    </div>
+                    <h1 class="text-3xl md:text-5xl font-bold text-islamic-green leading-tight max-w-2xl"
+                        id="lessonTitle">
+                        โครงการอบรมผู้สนใจอิสลาม
+                    </h1>
+                </div>
+
+                <!-- Share Button -->
+                <button onclick="shareContent()"
+                    class="hover-float bg-white text-islamic-green border border-islamic-green/10 px-5 py-3 rounded-2xl shadow-sm flex items-center justify-center gap-2 font-medium transition-colors hover:bg-islamic-green hover:text-white group w-full md:w-auto">
+                    <i class="fas fa-share-nodes group-hover:text-white text-islamic-green transition-colors"></i>
+                    <span>แชร์บทเรียน</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- =======================
+             MIDDLE: Core Content 
+        ======================== -->
+        <main class="space-y-8 flex-grow w-full">
+
+            <!-- Video Section -->
+            <section class="bg-white p-3 md:p-5 rounded-3xl shadow-float hover-float">
+                <div class="flex items-center gap-3 mb-4 px-3 pt-2">
+                    <div class="bg-red-50 text-red-600 p-2.5 rounded-xl shadow-sm">
+                        <i class="fas fa-video fa-fw"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg md:text-xl text-gray-800">วิดีโอบรรยาย</h3>
+                </div>
+                <div class="video-container rounded-[1.5rem] bg-gray-50 border border-gray-100">
+                    <iframe id="videoPlayer" src="" title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+            </section>
+
+            <!-- Slides Section -->
+            <section class="bg-white p-3 md:p-5 rounded-3xl shadow-float hover-float">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 px-3 pt-2">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-blue-50 text-blue-600 p-2.5 rounded-xl shadow-sm">
+                            <i class="fas fa-file-powerpoint fa-fw"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg md:text-xl text-gray-800">สไลด์ประกอบการบรรยาย</h3>
+                    </div>
+                    <!-- Download PDF Button -->
+                    <a id="downloadPdfBtn" href="#" target="_blank"
+                        class="hover-float text-sm bg-islamic-green/5 text-islamic-green hover:bg-islamic-green hover:text-white border border-islamic-green/10 transition-colors px-4 py-2.5 rounded-xl flex items-center justify-center gap-2 font-medium w-full sm:w-auto">
+                        <i class="fas fa-download"></i>
+                        <span>ดาวน์โหลดเอกสาร PDF</span>
+                    </a>
+                </div>
+                <div class="slide-container rounded-[1.5rem] bg-gray-50 border border-gray-100">
+                    <!-- Standard iframe properties, src updated via JS -->
+                    <iframe id="slidePlayer" src="" width="476" height="288" frameborder="0" scrolling="no"></iframe>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- =======================
+             BOTTOM: Navigation 
+        ======================== -->
+        <section
+            class="mt-10 flex justify-between items-center bg-white p-4 md:p-5 rounded-3xl shadow-float border border-white">
+            <button onclick="prevLesson()" id="prevBtn"
+                class="hover-float text-gray-500 hover:text-islamic-green bg-gray-50 hover:bg-islamic-green/10 disabled:opacity-30 disabled:hover-float-none disabled:cursor-not-allowed disabled:bg-transparent px-4 py-3 rounded-2xl flex items-center gap-2 md:gap-3 font-medium transition-all w-[130px] md:w-[160px] justify-center">
+                <i class="fas fa-chevron-left text-sm"></i>
+                <span class="text-sm md:text-base hidden sm:inline">บทเรียนก่อนหน้า</span>
+                <span class="text-sm sm:hidden">ก่อนหน้า</span>
+            </button>
+
+            <div class="text-sm md:text-base font-medium text-gray-400 bg-gray-50 px-4 py-2 rounded-xl">
+                บทที่ <span id="currentLessonNum" class="text-islamic-green font-bold text-lg md:text-xl">1</span><span
+                    class="mx-1">/</span><span id="totalLessonsNum">3</span>
+            </div>
+
+            <button onclick="nextLesson()" id="nextBtn"
+                class="hover-float bg-islamic-green text-white px-4 py-3 rounded-2xl shadow-md disabled:opacity-30 disabled:hover-float-none disabled:cursor-not-allowed flex items-center gap-2 md:gap-3 font-medium transition-all hover:bg-islamic-green/90 w-[130px] md:w-[160px] justify-center">
+                <span class="text-sm md:text-base hidden sm:inline">บทเรียนถัดไป</span>
+                <span class="text-sm sm:hidden">ถัดไป</span>
+                <i class="fas fa-chevron-right text-sm"></i>
+            </button>
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-12 text-center text-gray-400 text-sm pb-8">
+            <p>© 2026 โครงการอบรมผู้สนใจอิสลาม</p>
+        </footer>
+
+    </div>
+
+    <!-- =======================
+         JavaScript Application
+    ======================== -->
+    <script>
+        /**
+         * 1. Data Structure Array "lessons"
+         */
+        const lessons = [
+            {
+                id: 0,
+                title: 'การปฐมนิเทศน์',
+                category: 'แนะนำโครงการ',
+                youtubeId: 'oJCmMd5tx1A',
+                slideEmbedUrl: 'https://drive.google.com/file/d/1YOFFuKu21xQFuIm0Tly4yt_UX9y0eDsX/preview', // สามารถใส่ลิงก์สไลด์การปฐมนิเทศน์ได้ที่นี่
+                pdfUrl: 'https://drive.google.com/file/d/1YOFFuKu21xQFuIm0Tly4yt_UX9y0eDsX/view?usp=drive_link'
+            },
+            {
+                id: 1,
+                title: 'หัวข้อที่ 2 : ความเชื่อในเรื่องเอกภาพของพระเจ้า',
+                category: 'ปูพื้นฐานอิสลาม',
+                youtubeId: 'axxuGghhXGk',
+                slideEmbedUrl: 'https://drive.google.com/file/d/1kW4BjGBXkPTx0zcf9XTzOPUzR9rsdO82/preview', // ลิงก์ Google Drive สไลด์บรรยาย
+                pdfUrl: 'https://drive.google.com/file/d/1kW4BjGBXkPTx0zcf9XTzOPUzR9rsdO82/view?usp=drive_link'
+            },
+            {
+                id: 2,
+                title: 'การอาบน้ำละหมาด (อัลวุดูอฺ)',
+                category: 'ภาคปฏิบัติ',
+                youtubeId: 'jNQXAC9IVRw', // ลิงก์จำลอง
+                slideEmbedUrl: 'https://onedrive.live.com/embed?resid=MOCK_LINK_2&authkey=MOCK_KEY_2&em=2', // ใส่ลิงก์จำลอง Embed
+                pdfUrl: 'https://example.com/download/document2.pdf'
+            },
+            {
+                id: 3,
+                title: 'หลักศรัทธา 6 ประการ',
+                category: 'หลักอีหม่าน',
+                youtubeId: 'aqz-KE-bpKQ', // ลิงก์จำลอง
+                slideEmbedUrl: 'https://onedrive.live.com/embed?resid=MOCK_LINK_3&authkey=MOCK_KEY_3&em=2', // ใส่ลิงก์จำลอง Embed
+                pdfUrl: 'https://example.com/download/document3.pdf'
+            }
+            // เพิ่มหัวข้อจนครบ 15 หัวข้อในอนาคตที่นี่
+        ];
+
+        let currentIndex = 0;
+
+        // ดึง Elements ที่เกี่ยวข้อง
+        const titleEl = document.getElementById('lessonTitle');
+        const categoryEl = document.getElementById('categoryLabel');
+        const videoPlayer = document.getElementById('videoPlayer');
+        const slidePlayer = document.getElementById('slidePlayer');
+        const downloadBtn = document.getElementById('downloadPdfBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const currentNumEl = document.getElementById('currentLessonNum');
+        const totalNumEl = document.getElementById('totalLessonsNum');
+
+        // ฟังก์ชันเริ่มต้น (Initial Setup)
+        function initApp() {
+            totalNumEl.innerText = lessons.length;
+            loadLesson(currentIndex);
+        }
+
+        // โหลดข้อมูลบทเรียนลงบน UI
+        function loadLesson(index) {
+            const lesson = lessons[index];
+
+            // Text Updates
+            titleEl.innerText = `${lesson.title}`;
+            categoryEl.innerText = lesson.category;
+            currentNumEl.innerText = index + 1; // 1-based index based on position
+
+            // Media Updates
+            videoPlayer.src = `https://www.youtube.com/embed/${lesson.youtubeId}?rel=0`;
+            slidePlayer.src = lesson.slideEmbedUrl;
+            downloadBtn.href = lesson.pdfUrl;
+
+            // Handle Navigation Button States
+            prevBtn.disabled = index === 0;
+            if (index === 0) prevBtn.classList.remove('hover-float');
+            else prevBtn.classList.add('hover-float');
+
+            nextBtn.disabled = index === lessons.length - 1;
+            if (index === lessons.length - 1) nextBtn.classList.remove('hover-float');
+            else nextBtn.classList.add('hover-float');
+
+            // Animate fade briefly
+            document.body.style.opacity = '0.7';
+            setTimeout(() => { document.body.style.opacity = '1'; }, 150);
+
+            // Scroll เล็กน้อยเพื่อให้รู้ว่าเปลี่ยนบทเรียนแล้วถ้าดูจากจอมือถือ
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ปุ่มก่อนหน้า
+        function prevLesson() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                loadLesson(currentIndex);
+            }
+        }
+
+        // ปุ่มถัดไป
+        function nextLesson() {
+            if (currentIndex < lessons.length - 1) {
+                currentIndex++;
+                loadLesson(currentIndex);
+            }
+        }
+
+        // Web Share API
+        async function shareContent() {
+            const lesson = lessons[currentIndex];
+            const shareData = {
+                title: `โครงการอบรมผู้สนใจอิสลาม - ${lesson.title}`,
+                text: `เชิญร่วมศึกษาหัวข้อ "${lesson.title}" พร้อมวิดีโอและเอกสารประกอบเนื้อหาฟรี`,
+                url: window.location.href // ลิงก์ของหน้าเว็บ
+            };
+
+            try {
+                if (navigator.share) {
+                    await navigator.share(shareData);
+                } else {
+                    // หากเบราว์เซอร์ไม่รองรับ
+                    navigator.clipboard.writeText(`${shareData.text}\n${shareData.url}`);
+
+                    // สร้าง Alert เล็กๆ หรือ notification (ตรงนี้ขอใช้ alert ง่ายๆ ก่อน)
+                    alert('คัดลอกลิงก์เรียบร้อยแล้ว! สามารถนำไปวางเพื่อแชร์ได้เลย');
+                }
+            } catch (err) {
+                console.log('User cancelled share or error occurred:', err);
+            }
+        }
+
+        // รอหน้าเว็บโหลดเสร็จค่อยรัน
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+
+</html>
