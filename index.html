@@ -185,25 +185,42 @@
              BOTTOM: Navigation 
         ======================== -->
         <section
-            class="mt-10 flex justify-between items-center bg-white p-4 md:p-5 rounded-3xl shadow-float border border-white">
-            <button onclick="prevLesson()" id="prevBtn"
-                class="hover-float text-gray-500 hover:text-islamic-green bg-gray-50 hover:bg-islamic-green/10 disabled:opacity-30 disabled:hover-float-none disabled:cursor-not-allowed disabled:bg-transparent px-4 py-3 rounded-2xl flex items-center gap-2 md:gap-3 font-medium transition-all w-[130px] md:w-[160px] justify-center">
-                <i class="fas fa-chevron-left text-sm"></i>
-                <span class="text-sm md:text-base hidden sm:inline">บทเรียนก่อนหน้า</span>
-                <span class="text-sm sm:hidden">ก่อนหน้า</span>
-            </button>
+            class="mt-10 flex flex-col items-center bg-white p-4 md:p-5 rounded-3xl shadow-float border border-white gap-4 w-full">
 
-            <div class="text-sm md:text-base font-medium text-gray-400 bg-gray-50 px-4 py-2 rounded-xl">
-                บทที่ <span id="currentLessonNum" class="text-islamic-green font-bold text-lg md:text-xl">1</span><span
-                    class="mx-1">/</span><span id="totalLessonsNum">3</span>
+            <div class="flex justify-between items-center w-full gap-2 md:gap-4">
+                <button onclick="prevLesson()" id="prevBtn"
+                    class="hover-float text-gray-500 hover:text-islamic-green bg-gray-50 hover:bg-islamic-green/10 disabled:opacity-30 disabled:hover-float-none disabled:cursor-not-allowed disabled:bg-transparent px-4 py-3 rounded-2xl flex items-center gap-2 md:gap-3 font-medium transition-all w-[110px] sm:w-[130px] md:w-[160px] justify-center shrink-0">
+                    <i class="fas fa-chevron-left text-sm"></i>
+                    <span class="text-sm md:text-base hidden sm:inline">บทเรียนก่อนหน้า</span>
+                    <span class="text-sm sm:hidden">ก่อนหน้า</span>
+                </button>
+
+                <!-- Select Dropdown wrapper -->
+                <div class="flex flex-col sm:flex-row items-center gap-2 w-full justify-center overflow-hidden">
+                    <div
+                        class="text-sm md:text-base font-medium text-gray-400 bg-gray-50 px-3 py-2 rounded-xl text-center whitespace-nowrap shrink-0 hidden lg:block">
+                        บทที่ <span id="currentLessonNum"
+                            class="text-islamic-green font-bold text-lg md:text-xl">1</span><span
+                            class="mx-1">/</span><span id="totalLessonsNum">3</span>
+                    </div>
+                    <!-- Select Dropdown -->
+                    <select id="topicSelect" onchange="jumpToLesson(this.value)"
+                        class="bg-gray-50 border border-gray-100 text-gray-700 text-xs sm:text-sm md:text-base rounded-xl focus:ring-islamic-green focus:border-islamic-green block w-full max-w-xs p-2.5 outline-none cursor-pointer hover:bg-gray-100 transition-colors shadow-sm truncate">
+                    </select>
+                </div>
+
+                <button onclick="nextLesson()" id="nextBtn"
+                    class="hover-float bg-islamic-green text-white px-4 py-3 rounded-2xl shadow-md disabled:opacity-30 disabled:hover-float-none disabled:cursor-not-allowed flex items-center gap-2 md:gap-3 font-medium transition-all hover:bg-islamic-green/90 w-[110px] sm:w-[130px] md:w-[160px] justify-center shrink-0">
+                    <span class="text-sm md:text-base hidden sm:inline">บทเรียนถัดไป</span>
+                    <span class="text-sm sm:hidden">ถัดไป</span>
+                    <i class="fas fa-chevron-right text-sm"></i>
+                </button>
             </div>
 
-            <button onclick="nextLesson()" id="nextBtn"
-                class="hover-float bg-islamic-green text-white px-4 py-3 rounded-2xl shadow-md disabled:opacity-30 disabled:hover-float-none disabled:cursor-not-allowed flex items-center gap-2 md:gap-3 font-medium transition-all hover:bg-islamic-green/90 w-[130px] md:w-[160px] justify-center">
-                <span class="text-sm md:text-base hidden sm:inline">บทเรียนถัดไป</span>
-                <span class="text-sm sm:hidden">ถัดไป</span>
-                <i class="fas fa-chevron-right text-sm"></i>
-            </button>
+            <!-- Bullet Pagination Points -->
+            <div id="bulletContainer" class="flex flex-wrap justify-center gap-2 mt-2 w-full">
+            </div>
+
         </section>
 
         <!-- Footer -->
@@ -303,11 +320,11 @@
             },
             {
                 id: 10,
-                title: 'หัวข้อที่ 11',
-                category: 'หลักอีหม่าน',
-                youtubeId: 'HB7av2O8sbc',
-                slideEmbedUrl: 'https://drive.google.com/file/d/1onj7vhO1ufNyf4jkh_nkBgBZsNhSkOIa/preview',
-                pdfUrl: 'https://drive.google.com/file/d/1onj7vhO1ufNyf4jkh_nkBgBZsNhSkOIa/view'
+                title: 'หัวข้อที่ 11 : การหย่าร้างในอิสลาม',
+                category: 'ภาคปฏิบัติ',
+                youtubeId: 'J3AmdOCS_5M',
+                slideEmbedUrl: 'https://drive.google.com/file/d/1B_GuefsxzT9atqeC3x_DleYGhujO5gnt/preview',
+                pdfUrl: 'https://drive.google.com/file/d/1B_GuefsxzT9atqeC3x_DleYGhujO5gnt/view'
             },
             {
                 id: 11,
@@ -357,10 +374,38 @@
         const nextBtn = document.getElementById('nextBtn');
         const currentNumEl = document.getElementById('currentLessonNum');
         const totalNumEl = document.getElementById('totalLessonsNum');
+        const topicSelect = document.getElementById('topicSelect');
+        const bulletContainer = document.getElementById('bulletContainer');
 
         // ฟังก์ชันเริ่มต้น (Initial Setup)
         function initApp() {
             totalNumEl.innerText = lessons.length;
+
+            // Build Select Options & Bullets
+            topicSelect.innerHTML = '';
+            bulletContainer.innerHTML = '';
+
+            lessons.forEach((lesson, index) => {
+                // Option
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = lesson.title;
+                topicSelect.appendChild(option);
+
+                // Bullet
+                const bullet = document.createElement('button');
+                bullet.className = 'w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-gray-200 hover:bg-islamic-green/50 transition-all focus:outline-none';
+                bullet.title = lesson.title;
+                bullet.onclick = () => jumpToLesson(index);
+                bulletContainer.appendChild(bullet);
+            });
+
+            loadLesson(currentIndex);
+        }
+
+        // ฟังก์ชันกระโดดข้ามบทเรียนจาก Dropdown / Bullet
+        function jumpToLesson(index) {
+            currentIndex = parseInt(index);
             loadLesson(currentIndex);
         }
 
@@ -372,6 +417,21 @@
             titleEl.innerText = `${lesson.title}`;
             categoryEl.innerText = lesson.category;
             currentNumEl.innerText = index + 1; // 1-based index based on position
+
+            // Update Select
+            if (topicSelect) topicSelect.value = index;
+
+            // Update Bullets
+            if (bulletContainer) {
+                const bullets = bulletContainer.querySelectorAll('button');
+                bullets.forEach((b, i) => {
+                    if (i === index) {
+                        b.className = 'w-2 h-2 md:w-2.5 md:h-2.5 rounded-full transition-all focus:outline-none bg-islamic-green shadow-sm scale-125';
+                    } else {
+                        b.className = 'w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-gray-200 hover:bg-islamic-green/50 transition-all focus:outline-none';
+                    }
+                });
+            }
 
             // Media Updates
             videoPlayer.src = `https://www.youtube.com/embed/${lesson.youtubeId}?rel=0`;
